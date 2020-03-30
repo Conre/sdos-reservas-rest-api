@@ -1,0 +1,5 @@
+{
+  "mensaje": "La sala indicada no se encuentra en el sistema",
+  "informacion": "identificador de sala: 123",
+  "codigo": 404
+}

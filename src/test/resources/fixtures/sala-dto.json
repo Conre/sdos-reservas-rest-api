@@ -1,0 +1,8 @@
+{
+  "codigo": "1234",
+  "nombre": "Sala 1",
+  "capacidad" : 3,
+  "recursosTecnicos" : [
+    "Televisor", "Proyector", "Pizarra digital", "Videoconferencia"
+  ]
+}
