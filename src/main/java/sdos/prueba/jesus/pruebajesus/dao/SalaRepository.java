@@ -1,9 +1,9 @@
 package sdos.prueba.jesus.pruebajesus.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import sdos.prueba.jesus.pruebajesus.domain.Sala;
 
-public interface SalaRepository extends CrudRepository<Sala, String> {
+public interface SalaRepository extends JpaRepository<Sala, String> {
 
 
 }

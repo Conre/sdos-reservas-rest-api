@@ -1,5 +1,7 @@
 package sdos.prueba.jesus.pruebajesus.web;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +24,14 @@ import sdos.prueba.jesus.pruebajesus.exception.SalaControllerAdvice;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.SalaService;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -53,7 +61,7 @@ public class SalaControllerITest {
         SalaDTO sala = objectMapper.readValue(ResourceUtils.getFile("classpath:fixtures/sala-dto.json"), SalaDTO.class);
         when(salaService.getSalaById(anyString())).thenReturn(sala);
         this.mockMvc.perform(
-                get("/sala/1234"))
+                get("/salas/1234"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(objectMapper.writeValueAsString(sala)));
 
@@ -65,10 +73,38 @@ public class SalaControllerITest {
         when(salaService.getSalaById(anyString())).thenThrow(new SalaNotFoundException("123"));
 
         this.mockMvc.perform(
-                get("/sala/123"))
+                get("/salas/123"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string(""));
 
         verify(salaService).getSalaById("123");
     }
+
+    @Test
+    void givenPageAndSize_whenGetSalas_thenReturnResponse() throws Exception {
+        List<SalaDTO> salas = objectMapper.readValue(ResourceUtils.getFile("classpath:fixtures/sala-list.json"), new TypeReference<List<SalaDTO>>(){});
+        when(salaService.getSalas(anyInt(), anyInt())).thenReturn(salas);
+
+        this.mockMvc.perform(
+                get("/salas").queryParam("page","1").queryParam("size","20"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(objectMapper.writeValueAsString(salas)));
+
+        verify(salaService).getSalas(anyInt(), anyInt());
+
+    }
+
+   /* @Test
+    void givenSalaId_whenDeleteSala_thenReturnResponse() throws Exception {
+        String id = "1234";
+        doNothing().when(salaService).deleteSalaById(anyString());
+
+        this.mockMvc.perform(
+                delete("/salas/1234"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(""));
+
+        verify(salaService).deleteSalaById(id);
+
+    }*/
 }

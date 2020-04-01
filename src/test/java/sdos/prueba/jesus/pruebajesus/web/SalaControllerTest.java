@@ -7,7 +7,7 @@ import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.SalaService;
 
-import java.util.Arrays;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -39,4 +39,41 @@ public class SalaControllerTest {
         verify(salaService).getSalaById(idSala);
         assertEquals(sala, expected);
     }
+
+    @Test
+    void givenPageAndSize_whenGetSalas_thenReturnListSalaDTO() {
+        SalaDTO sala1 = new SalaDTO();
+        sala1.setCodigo("12");
+        sala1.setNombre("Sala 1");
+        sala1.setCapacidad(3);
+        sala1.setRecursosTecnicos(Sets.newHashSet(Arrays.asList("Televisor" , "Proyector")));
+
+        SalaDTO sala2 = new SalaDTO();
+        sala2.setCodigo("13");
+        sala2.setNombre("Sala 2");
+        sala2.setCapacidad(5);
+        sala2.setRecursosTecnicos(Sets.newHashSet(Arrays.asList("Pizarra digital")));
+
+        List<SalaDTO> expected = new ArrayList<>();
+        expected.add(sala1);
+        expected.add(sala2);
+        when(salaService.getSalas(anyInt(),anyInt())).thenReturn(expected);
+
+        List<SalaDTO> salas = salaController.getSalas(anyInt(), anyInt());
+
+        verify(salaService).getSalas(anyInt(), anyInt());
+
+        assertEquals(salas, expected);
+    }
+
+   /* @Test
+    void givenIdSala_whenDeleteSalaById_thenCallSalaService() throws SalaNotFoundException {
+        String idSala = "1234";
+
+        doNothing().when(salaService).deleteSalaById(anyString());
+
+        salaController.deleteSalaById(idSala);
+
+        verify(salaService).deleteSalaById(idSala);
+    }*/
 }

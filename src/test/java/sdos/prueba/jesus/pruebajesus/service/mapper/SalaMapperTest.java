@@ -38,4 +38,6 @@ class SalaMapperTest {
 
         Assertions.assertEquals(salaDTO, expected);
     }
+
+
 }
