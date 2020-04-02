@@ -1,5 +1,6 @@
 package sdos.prueba.jesus.pruebajesus.web;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
@@ -28,7 +29,8 @@ public class SalaController {
     }
 
     @DeleteMapping( path = "/salas/{idSala}")
-    public void deleteSalaById(@PathVariable String idSala) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSalaById(@PathVariable String idSala) throws SalaNotFoundException {
         salaService.deleteSalaById(idSala);
     }
 }

@@ -1,10 +1,7 @@
 package sdos.prueba.jesus.pruebajesus.dao;
 
 import org.assertj.core.util.Sets;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -43,20 +40,25 @@ public class SalaRepositoryTest {
 
     @Test
     void givenPageRequest_whenFindAll_thenReturnPageSala() {
-        entityManager.persist(new Sala("12345","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("124","Televisor"), new RecursoTecnico("134","Proyector")))));
+        RecursoTecnico recurso1 = new RecursoTecnico("124","Televisor");
+        RecursoTecnico recurso2 = new RecursoTecnico("134","Proyector");
+        entityManager.persist(recurso1);
+        entityManager.persist(recurso2);
+        entityManager.persist(new Sala("12345","Sala 1", 3, Sets.newHashSet(Arrays.asList(recurso1, recurso2))));
+        entityManager.persist(new Sala("123456","Sala 2", 5, Sets.newHashSet(Arrays.asList(recurso1))));
         //this.entityManager.persist(new Sala("12345", "Sala 2", 5, Sets.newHashSet(Arrays.asList(new RecursoTecnico("14", "Televisor"), new RecursoTecnico("15", "Proyector")))));
 
         List<Sala> expected = new ArrayList<>();
-        expected.add(new Sala("1234", "Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12", "Televisor"), new RecursoTecnico("13", "Proyector")))));
-        expected.add(new Sala("12345", "Sala 2", 5, Sets.newHashSet(Arrays.asList(new RecursoTecnico("14", "Televisor"), new RecursoTecnico("15", "Proyector")))));
+        expected.add(new Sala("12345", "Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("124", "Televisor"), new RecursoTecnico("134", "Proyector")))));
+        expected.add(new Sala("123456", "Sala 2", 5, Sets.newHashSet(Arrays.asList(new RecursoTecnico("124", "Televisor")))));
 
-        List<Sala> paginacion =  this.salaRepository.findAll(PageRequest.of(1,20)).getContent();
+        List<Sala> paginacion =  this.salaRepository.findAll(PageRequest.of(0,20)).getContent();
 
         assertEquals(paginacion, expected);
 
     }
 
-    /*@Test
+    @Test
     void givenIdSala_whenDeleteByIdSala_thenReturnNothing() {
         Sala sala = new Sala("1234","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12","Televisor"), new RecursoTecnico("13","Proyector"))));
         entityManager.persist(new Sala("1234","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12","Televisor"), new RecursoTecnico("13","Proyector")))));
@@ -65,7 +67,7 @@ public class SalaRepositoryTest {
         Optional<Sala> expected = this.salaRepository.findById("1234");
 
         assertFalse(expected.isPresent());
-    }*/
+    }
 
 
 }

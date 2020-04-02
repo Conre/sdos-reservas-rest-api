@@ -94,17 +94,27 @@ public class SalaControllerITest {
 
     }
 
-   /* @Test
-    void givenSalaId_whenDeleteSala_thenReturnResponse() throws Exception {
+    @Test
+    void givenSalaId_whenDeleteSala_thenReturnResponseCode() throws Exception {
         String id = "1234";
         doNothing().when(salaService).deleteSalaById(anyString());
 
         this.mockMvc.perform(
                 delete("/salas/1234"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(""));
+                .andExpect(status().isNoContent());
 
         verify(salaService).deleteSalaById(id);
 
-    }*/
+    }
+
+    @Test
+    void givenSalaId_whenDeleteSala_thenReturnSalaNotFoundException() throws Exception {
+        doThrow(new SalaNotFoundException("123")).when(salaService).deleteSalaById(anyString());
+
+        this.mockMvc.perform(
+                delete("/salas/123"))
+                .andExpect(status().isNotFound());
+
+        verify(salaService).deleteSalaById("123");
+    }
 }

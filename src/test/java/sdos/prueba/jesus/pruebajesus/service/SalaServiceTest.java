@@ -143,7 +143,7 @@ public class SalaServiceTest {
         Assertions.assertEquals(salasDTO, expected);
     }
 
-   /* @Test
+    @Test
     void givenSalaId_whenDeleteSalaById_thenCallSalaRepository() throws SalaNotFoundException {
         String idSala = "1234";
         doNothing().when(salaRepository).deleteById(anyString());
@@ -152,5 +152,5 @@ public class SalaServiceTest {
 
         verify(salaRepository).deleteById(idSala);
 
-    }*/
+    }
 }
