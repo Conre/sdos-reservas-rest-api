@@ -40,4 +40,5 @@ public class SalaService {
     public void deleteSalaById(String idSala) throws SalaNotFoundException {
         salaRepository.deleteById(idSala);
     }
+
 }

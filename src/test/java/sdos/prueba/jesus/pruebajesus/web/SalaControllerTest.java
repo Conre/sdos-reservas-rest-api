@@ -76,4 +76,5 @@ public class SalaControllerTest {
 
         verify(salaService).deleteSalaById(idSala);
     }
+
 }

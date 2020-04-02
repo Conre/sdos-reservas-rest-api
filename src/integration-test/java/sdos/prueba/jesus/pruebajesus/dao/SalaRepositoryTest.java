@@ -69,5 +69,4 @@ public class SalaRepositoryTest {
         assertFalse(expected.isPresent());
     }
 
-
 }

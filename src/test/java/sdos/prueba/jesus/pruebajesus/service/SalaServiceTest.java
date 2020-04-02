@@ -153,4 +153,5 @@ public class SalaServiceTest {
         verify(salaRepository).deleteById(idSala);
 
     }
+
 }

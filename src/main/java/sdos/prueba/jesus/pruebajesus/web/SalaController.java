@@ -33,4 +33,5 @@ public class SalaController {
     public void deleteSalaById(@PathVariable String idSala) throws SalaNotFoundException {
         salaService.deleteSalaById(idSala);
     }
+
 }
