@@ -27,8 +27,8 @@ public class SalaController {
        return  salaService.getSalas(page, size);
     }
 
-   /* @DeleteMapping( path = "/salas/{idSala}")
+    @DeleteMapping( path = "/salas/{idSala}")
     public void deleteSalaById(@PathVariable String idSala) {
-         salaService.deleteSalaById(idSala);
-    }*/
+        salaService.deleteSalaById(idSala);
+    }
 }
