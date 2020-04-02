@@ -56,16 +56,7 @@ public class SalaRepositoryTest {
 
     }
 
-    /*@Test
-    void givenIdSala_whenDeleteByIdSala_thenReturnNothing() {
-        Sala sala = new Sala("1234","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12","Televisor"), new RecursoTecnico("13","Proyector"))));
-        entityManager.persist(new Sala("1234","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12","Televisor"), new RecursoTecnico("13","Proyector")))));
 
-        salaRepository.deleteById(sala.getCodigo());
-        Optional<Sala> expected = this.salaRepository.findById("1234");
-
-        assertFalse(expected.isPresent());
-    }*/
 
 
 }

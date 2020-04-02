@@ -1,37 +1,25 @@
 package sdos.prueba.jesus.pruebajesus.web;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import sdos.prueba.jesus.pruebajesus.config.JacksonConfig;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
 import sdos.prueba.jesus.pruebajesus.exception.SalaControllerAdvice;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.SalaService;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -94,17 +82,5 @@ public class SalaControllerITest {
 
     }
 
-   /* @Test
-    void givenSalaId_whenDeleteSala_thenReturnResponse() throws Exception {
-        String id = "1234";
-        doNothing().when(salaService).deleteSalaById(anyString());
 
-        this.mockMvc.perform(
-                delete("/salas/1234"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(""));
-
-        verify(salaService).deleteSalaById(id);
-
-    }*/
 }
