@@ -19,7 +19,7 @@ public class Sala {
     private String nombre;
     @Column
     private int capacidad;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.REFRESH)
     private Set<RecursoTecnico> recursosTecnicos;
 
 

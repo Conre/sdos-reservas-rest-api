@@ -37,5 +37,8 @@ public class SalaService {
         return salaRepository.findAll(PageRequest.of(page,size)).getContent().stream().map(sala -> salaMapper.from(sala)).collect(Collectors.toList());
     }
 
+    public void deleteSalaById(String idSala) throws SalaNotFoundException {
+        salaRepository.deleteById(idSala);
+    }
 
 }

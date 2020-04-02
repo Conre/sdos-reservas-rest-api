@@ -66,5 +66,15 @@ public class SalaControllerTest {
         assertEquals(salas, expected);
     }
 
+    @Test
+    void givenIdSala_whenDeleteSalaById_thenCallSalaService() throws SalaNotFoundException {
+        String idSala = "1234";
+
+        doNothing().when(salaService).deleteSalaById(anyString());
+
+        salaController.deleteSalaById(idSala);
+
+        verify(salaService).deleteSalaById(idSala);
+    }
 
 }
