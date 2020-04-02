@@ -1,5 +1,6 @@
 package sdos.prueba.jesus.pruebajesus.service;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import sdos.prueba.jesus.pruebajesus.dao.SalaRepository;
 import sdos.prueba.jesus.pruebajesus.domain.Sala;
@@ -7,7 +8,9 @@ import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.mapper.SalaMapper;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SalaService {
@@ -25,4 +28,14 @@ public class SalaService {
         Optional<Sala> sala = salaRepository.findById(codigo);
         return salaMapper.from(sala.orElseThrow(()-> new SalaNotFoundException(codigo)));
     }
+
+    public List<SalaDTO> getSalas(int page, int size) {
+
+        if(size > 20){
+            size = 20;
+        }
+        return salaRepository.findAll(PageRequest.of(page,size)).getContent().stream().map(sala -> salaMapper.from(sala)).collect(Collectors.toList());
+    }
+
+
 }

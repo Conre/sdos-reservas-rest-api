@@ -1,0 +1,26 @@
+[
+
+    {
+      "codigo": "1234",
+      "nombre": "Sala 1",
+      "capacidad": 2,
+      "recursosTecnicos": [
+        "Televisor",
+        "Proyector",
+        "Pizarra digital",
+        "Videoconferencia"
+      ]
+    },
+    {
+      "codigo": "12345",
+      "nombre": "Sala 2",
+      "capacidad": 5,
+      "recursosTecnicos": [
+        "Televisor",
+        "Proyector",
+        "Pizarra digital",
+        "Videoconferencia"
+      ]
+    }
+
+]

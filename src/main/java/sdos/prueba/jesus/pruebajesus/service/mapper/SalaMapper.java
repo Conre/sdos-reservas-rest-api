@@ -5,6 +5,7 @@ import sdos.prueba.jesus.pruebajesus.domain.RecursoTecnico;
 import sdos.prueba.jesus.pruebajesus.domain.Sala;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component

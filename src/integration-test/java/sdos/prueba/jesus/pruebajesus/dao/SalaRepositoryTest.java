@@ -1,19 +1,28 @@
 package sdos.prueba.jesus.pruebajesus.dao;
 
 import org.assertj.core.util.Sets;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.test.annotation.DirtiesContext;
 import sdos.prueba.jesus.pruebajesus.domain.RecursoTecnico;
 import sdos.prueba.jesus.pruebajesus.domain.Sala;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+@Transactional
 public class SalaRepositoryTest {
 
     @Autowired
@@ -25,9 +34,29 @@ public class SalaRepositoryTest {
     @Test
     void givenIdSala_whenFindByIdSala_thenReturnSala() {
         Sala sala = new Sala("1234","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12","Televisor"), new RecursoTecnico("13","Proyector"))));
-        this.entityManager.persist(new Sala("1234","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12","Televisor"), new RecursoTecnico("13","Proyector")))));
+        entityManager.persist(new Sala("1234","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12","Televisor"), new RecursoTecnico("13","Proyector")))));
+
         Sala expected = this.salaRepository.findById("1234").get();
 
         assertEquals(sala, expected);
     }
+
+    @Test
+    void givenPageRequest_whenFindAll_thenReturnPageSala() {
+        entityManager.persist(new Sala("12345","Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("124","Televisor"), new RecursoTecnico("134","Proyector")))));
+        //this.entityManager.persist(new Sala("12345", "Sala 2", 5, Sets.newHashSet(Arrays.asList(new RecursoTecnico("14", "Televisor"), new RecursoTecnico("15", "Proyector")))));
+
+        List<Sala> expected = new ArrayList<>();
+        expected.add(new Sala("1234", "Sala 1", 3, Sets.newHashSet(Arrays.asList(new RecursoTecnico("12", "Televisor"), new RecursoTecnico("13", "Proyector")))));
+        expected.add(new Sala("12345", "Sala 2", 5, Sets.newHashSet(Arrays.asList(new RecursoTecnico("14", "Televisor"), new RecursoTecnico("15", "Proyector")))));
+
+        List<Sala> paginacion =  this.salaRepository.findAll(PageRequest.of(1,20)).getContent();
+
+        assertEquals(paginacion, expected);
+
+    }
+
+
+
+
 }
