@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import sdos.prueba.jesus.pruebajesus.dao.SalaRepository;
 import sdos.prueba.jesus.pruebajesus.domain.Sala;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
+import sdos.prueba.jesus.pruebajesus.dto.SalaDTORecursosNombreOnly;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.mapper.SalaMapper;
 
@@ -41,4 +42,13 @@ public class SalaService {
         salaRepository.deleteById(idSala);
     }
 
+    public void saveSala(SalaDTO sala) {
+        salaMapper.from(salaRepository.save(salaMapper.to(sala)));
+    }
+
+    public void updateSalaById(String idSala, SalaDTORecursosNombreOnly toUpdate) throws SalaNotFoundException {
+        Sala sala = salaRepository.findById(idSala).orElseThrow(()->new SalaNotFoundException(idSala));
+        Sala toSave = salaMapper.updateNombreAndRecursos(sala, toUpdate);
+        salaRepository.save(toSave);
+    }
 }

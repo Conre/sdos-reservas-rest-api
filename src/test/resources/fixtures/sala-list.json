@@ -5,10 +5,10 @@
       "nombre": "Sala 1",
       "capacidad": 2,
       "recursosTecnicos": [
-        "Televisor",
-        "Proyector",
-        "Pizarra digital",
-        "Videoconferencia"
+        {"codigo":"12", "nombre":"Televisor"},
+        {"codigo":"13","nombre":"Proyector"},
+        {"codigo":"14","nombre":"Pizarra digital"},
+        {"codigo":"15","nombre":"Videoconferencia"}
       ]
     },
     {
@@ -16,10 +16,10 @@
       "nombre": "Sala 2",
       "capacidad": 5,
       "recursosTecnicos": [
-        "Televisor",
-        "Proyector",
-        "Pizarra digital",
-        "Videoconferencia"
+        {"codigo":"12", "nombre":"Televisor"},
+        {"codigo":"13","nombre":"Proyector"},
+        {"codigo":"14","nombre":"Pizarra digital"},
+        {"codigo":"15","nombre":"Videoconferencia"}
       ]
     }
 

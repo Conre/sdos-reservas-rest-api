@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sdos.prueba.jesus.pruebajesus.domain.RecursoTecnico;
 import sdos.prueba.jesus.pruebajesus.domain.Sala;
+import sdos.prueba.jesus.pruebajesus.dto.RecursoTecnicoDTO;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
 
 import java.util.Arrays;
@@ -34,7 +35,7 @@ class SalaMapperTest {
         expected.setCodigo("1234");
         expected.setNombre("Sala 1");
         expected.setCapacidad(3);
-        expected.setRecursosTecnicos(Sets.newHashSet(Arrays.asList("Televisor", "Proyector")));
+        expected.setRecursosTecnicos(Sets.newHashSet(Arrays.asList(new RecursoTecnicoDTO("1212","Televisor"), new RecursoTecnicoDTO("4444","Proyector"))));
 
         Assertions.assertEquals(salaDTO, expected);
     }

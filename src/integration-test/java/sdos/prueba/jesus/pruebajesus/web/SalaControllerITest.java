@@ -16,11 +16,13 @@ import sdos.prueba.jesus.pruebajesus.exception.SalaControllerAdvice;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.SalaService;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -104,5 +106,17 @@ public class SalaControllerITest {
                 .andExpect(status().isNotFound());
 
         verify(salaService).deleteSalaById("123");
+    }
+
+    @Test
+    void givenSalaDTO_whenSaveSala_thenReturnSalaDTO() throws Exception {
+        SalaDTO sala = objectMapper.readValue(ResourceUtils.getFile("classpath:fixtures/sala-dto.json"), SalaDTO.class);
+        doNothing().when(salaService).saveSala(any(SalaDTO.class));
+
+        this.mockMvc.perform(
+                post("/salas/nueva-sala", sala))
+                .andExpect(status().isCreated());
+
+        verify(salaService).saveSala(sala);
     }
 }
