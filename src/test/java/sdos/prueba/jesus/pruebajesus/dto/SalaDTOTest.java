@@ -23,10 +23,10 @@ public class SalaDTOTest {
         salaDTO.setCodigo("1234");
         salaDTO.setNombre("Sala 1");
         salaDTO.setCapacidad(3);
-        salaDTO.setRecursosTecnicos(Sets.newHashSet(Arrays.asList("Televisor",
-                "Proyector",
-                "Pizarra digital",
-                "Videoconferencia")));
+        salaDTO.setRecursosTecnicos(Sets.newHashSet(Arrays.asList( new RecursoTecnicoDTO("12","Televisor"),
+                new RecursoTecnicoDTO("13","Proyector"),
+                new RecursoTecnicoDTO("14","Pizarra digital"),
+                new RecursoTecnicoDTO("15","Videoconferencia"))));
     }
 
     @Test

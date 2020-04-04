@@ -3,6 +3,7 @@ package sdos.prueba.jesus.pruebajesus.web;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
+import sdos.prueba.jesus.pruebajesus.dto.SalaDTORecursosNombreOnly;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.SalaService;
 
@@ -34,4 +35,13 @@ public class SalaController {
         salaService.deleteSalaById(idSala);
     }
 
+    @PostMapping(path = "salas/nueva-sala")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveSala(SalaDTO sala) {
+        salaService.saveSala(sala);
+    }
+
+    public void updateSalaById(String idSala, SalaDTORecursosNombreOnly toUpdate) throws SalaNotFoundException {
+        salaService.updateSalaById(idSala, toUpdate);
+    }
 }
