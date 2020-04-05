@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.ResourceUtils;
 import sdos.prueba.jesus.pruebajesus.config.JacksonConfig;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
+import sdos.prueba.jesus.pruebajesus.dto.SalaDTORecursosNombreOnly;
 import sdos.prueba.jesus.pruebajesus.exception.SalaControllerAdvice;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.SalaService;
@@ -118,5 +119,17 @@ public class SalaControllerITest {
                 .andExpect(status().isCreated());
 
         verify(salaService).saveSala(sala);
+    }
+
+    @Test
+    void givenSalaIdAndRecursosNombreOnly_whenUpdateSalaById_thenReturnResponse() throws Exception {
+        String idSala = "1234";
+        SalaDTORecursosNombreOnly toUpdate = objectMapper.readValue(ResourceUtils.getFile("classpath:fixtures/sala-update.json"), SalaDTORecursosNombreOnly.class);
+        doNothing().when(salaService).updateSalaById(anyString(), any(SalaDTORecursosNombreOnly.class));
+
+        this.mockMvc.perform(
+                patch("/salas/"+idSala))
+                .andExpect(status().isNoContent());
+        verify(salaService).updateSalaById(idSala, toUpdate);
     }
 }
