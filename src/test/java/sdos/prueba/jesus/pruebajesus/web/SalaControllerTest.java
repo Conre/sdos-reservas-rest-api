@@ -3,15 +3,15 @@ package sdos.prueba.jesus.pruebajesus.web;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.web.JsonPath;
-import sdos.prueba.jesus.pruebajesus.domain.Sala;
 import sdos.prueba.jesus.pruebajesus.dto.RecursoTecnicoDTO;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTO;
 import sdos.prueba.jesus.pruebajesus.dto.SalaDTORecursosNombreOnly;
 import sdos.prueba.jesus.pruebajesus.exception.SalaNotFoundException;
 import sdos.prueba.jesus.pruebajesus.service.SalaService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;

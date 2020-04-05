@@ -41,6 +41,8 @@ public class SalaController {
         salaService.saveSala(sala);
     }
 
+    @PatchMapping(path = "/salas/{idSala}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateSalaById(String idSala, SalaDTORecursosNombreOnly toUpdate) throws SalaNotFoundException {
         salaService.updateSalaById(idSala, toUpdate);
     }
